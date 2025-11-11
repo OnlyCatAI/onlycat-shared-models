@@ -86,7 +86,9 @@ export class Device {
                 h = Math.imul(h ^ s.charCodeAt(i), 2654435761);
             return (h ^ h >>> 16) >>> 0;
         };
-        const hash = funhash(this.deviceId);
+        
+        // NB: Hyphen was missed in original implementation - keep for compatibility
+        const hash = funhash(this.deviceId.replace('-', ''));
 
         // Use the hash to pick parts
         const tone = parts.tone[Math.abs(hash) % parts.tone.length];
