@@ -1,17 +1,17 @@
 import { EventClassification, DeviceEvent } from './DeviceEvent';
 
-export interface DeviceEventsCriteria {
+export interface DeviceEventCriteria {
     beforeGlobalId?: number;
     eventClassification?: EventClassification;
     isStarred?: boolean;
     isContraband?: boolean;
 }
 
-export class DeviceEventsCriteriaHelper {
+export class DeviceEventCriteriaHelper {
     /**
      * Check if an event matches the given criteria
      */
-    static eventMatches(event: DeviceEvent, criteria?: DeviceEventsCriteria): boolean {
+    static eventMatches(event: DeviceEvent, criteria?: DeviceEventCriteria): boolean {
         if (!criteria) return true;
         
         // Check eventClassification if specified
