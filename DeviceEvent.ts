@@ -14,13 +14,6 @@ export enum EventClassification {
     RemoteUnlock = 10
 }
 
-export interface DeviceEventCriteria {
-    beforeGlobalId?: number;
-    eventClassification?: EventClassification;
-    isStarred?: boolean;
-    isContraband?: boolean;
-}
-
 export class DeviceEvent {
     globalId?: number;
     deviceId: string;
