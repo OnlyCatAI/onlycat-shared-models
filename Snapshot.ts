@@ -8,7 +8,7 @@ export class Snapshot {
     constructor(initObj: Partial<Snapshot> & Record<string, any>) {
         this.id = initObj.id;
         this.deviceId = initObj.deviceId!;
-        this.timestamp = initObj.timestamp!;
+        this.timestamp = new Date(initObj.timestamp!);
 
         // Assign other properties from initObj to this instance
         for (const key in initObj) {
