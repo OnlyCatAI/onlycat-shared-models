@@ -17,8 +17,8 @@ export enum LockState {
 export enum FlapState {
     Unknown = -1,
     Closed = 0,
-    OpenInward = 1,
-    OpenOutward = 2,
+    OpenOutward = 1,
+    OpenInward = 2,
     Invalid = 3
 }
 
