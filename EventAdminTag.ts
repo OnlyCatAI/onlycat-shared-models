@@ -1,4 +1,5 @@
 export class EventAdminTag {
+    id?: number;
     deviceId: string;
     eventId: number;
     tag: string;
@@ -7,6 +8,7 @@ export class EventAdminTag {
     [key: string]: any;
 
     constructor(initObj: Partial<EventAdminTag> & Record<string, any>) {
+        this.id = initObj.id;
         this.deviceId = initObj.deviceId!;
         this.eventId = initObj.eventId!;
         this.tag = initObj.tag!;
