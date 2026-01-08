@@ -41,6 +41,57 @@ export enum RfidReadStatus
 }
 
 export class FrameMetadata {
+    private static readonly queryKeyMapping: Record<string, string> = {
+        /* Populated by FrameProvider */
+        t: 'timestamp',
+        l: 'lockState',
+        lt: 'targetLockState',
+        m: 'motionSensorState',
+        ma: 'motionSensorAge',
+        mi: 'motionSensorIndoor',
+        mo: 'motionSensorOutdoor',
+        f: 'flapState',
+        c: 'frameClassificationHex',
+        rs: 'rfidReadStatus',
+        ro: 'rfidReadOutdoor',
+        rf: 'rfidReadFrequency',
+        ra: 'rfidReadAge',
+        rrt: 'rfidResonanceRampTime',
+        rrv: 'rfidResonanceRampVoltage',
+        rrm: 'rfidResonanceRampVoltageMax',
+        ri: 'rfidReadCode',
+        rsl: 'rfidReadSignalLevel',
+        rnl: 'rfidReadNoiseLevel',
+
+        /* Populated by ActiveEvent */
+        ets: 'eventTriggerSource',
+        ec: 'eventClassification',
+        ecc: 'eventClassificationChanged',
+        pa: 'transitPolicyAction',
+        pw: 'transitPolicyWaitState'
+    };
+
+    static decodeQuery(query: Record<string, any> | undefined | null): Record<string, any> {
+        const decoded: Record<string, any> = {};
+
+        for (const [key, rawValue] of Object.entries(query ?? {})) {
+            const mappedKey = FrameMetadata.queryKeyMapping[key] ?? key;
+
+            let value: any = rawValue;
+            if (Array.isArray(value)) {
+                value = value[value.length - 1];
+            }
+
+            if (value === '') {
+                value = true;
+            }
+
+            decoded[mappedKey] = value;
+        }
+
+        return decoded;
+    }
+
     motionSensorState: MotionSensorState;
     lockState: LockState;
     flapState: FlapState;
