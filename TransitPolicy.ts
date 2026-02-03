@@ -14,6 +14,16 @@ export interface TransitPolicyRuleAction
     sound?: string;
 }
 
+export interface TransitPolicyUxOnActivate
+{
+    sound?: string;
+}
+
+export interface TransitPolicyUx
+{
+    onActivate?: TransitPolicyUxOnActivate;
+}
+
 export class TransitPolicyRule
 {
     criteria?: TransitPolicyRuleCriteria;
@@ -37,12 +47,20 @@ export class TransitPolicy {
     rules: TransitPolicyRule[];
     idleLock: boolean;
     idleLockBattery: boolean;
+    ux: TransitPolicyUx;
     [key: string]: any; // Allow any additional properties
 
     constructor(initObj: Partial<TransitPolicy> & Record<string, any>) {
         this.rules = initObj.rules ?? [];
         this.idleLock = initObj.idleLock ?? true;
         this.idleLockBattery = initObj.idleLockBattery ?? this.idleLock;
+        this.ux = {
+            ...(initObj.ux ?? {}),
+            onActivate: {
+                ...(initObj.ux?.onActivate ?? {}),
+                sound: initObj.ux?.onActivate?.sound ?? 'coin'
+            }
+        };
 
         // Assign other properties from initObj to this instance
         for (const key in initObj) {
