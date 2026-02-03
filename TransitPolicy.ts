@@ -69,4 +69,8 @@ export class TransitPolicy {
             }
         }
     }
+
+    toJSON(): Record<string, any> {
+        return { ...this };
+    }
 }
