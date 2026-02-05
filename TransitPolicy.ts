@@ -12,6 +12,8 @@ export interface TransitPolicyRuleAction
 {
     lock?: boolean;
     sound?: string;
+    lockoutDuration?: number;
+    final?: boolean;
 }
 
 export class TransitPolicyRule
