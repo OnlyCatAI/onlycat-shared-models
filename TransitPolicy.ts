@@ -1,4 +1,5 @@
 import { EventClassification, EventTriggerSource } from "./DeviceEvent";
+import { FlapState, MotionSensorState } from "./FrameMetadata";
 
 export interface TransitPolicyRuleCriteria
 {
@@ -6,6 +7,8 @@ export interface TransitPolicyRuleCriteria
     eventClassification?: EventClassification | EventClassification[];
     rfidCode?: string | string[];
     timeRange?: string | string[];
+    motionSensorState?: MotionSensorState | MotionSensorState[];
+    flapState?: FlapState | FlapState[];
 }
 
 export interface TransitPolicyRuleAction
