@@ -11,7 +11,9 @@ export class DeviceTransitPolicy {
         this.deviceTransitPolicyId = initObj.deviceTransitPolicyId!;
         this.deviceId = initObj.deviceId!;
         this.name = initObj.name!;
-        this.transitPolicy = initObj.transitPolicy!;
+        this.transitPolicy = initObj.transitPolicy instanceof TransitPolicy
+            ? initObj.transitPolicy
+            : new TransitPolicy(initObj.transitPolicy!);
 
         // Assign other properties from initObj to this instance
         for (const key in initObj) {
