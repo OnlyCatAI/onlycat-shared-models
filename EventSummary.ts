@@ -12,6 +12,6 @@ export interface SubEvent {
 export interface EventSummary {
     deviceId: string;
     eventId: number;
-    frameCount: number;
+    processedFrameCount: number;
     subevents: SubEvent[];
 }
