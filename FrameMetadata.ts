@@ -40,6 +40,14 @@ export enum RfidReadStatus
     Recovered
 }
 
+export enum RfidReadProtocol
+{
+    Unknown = 0,
+    EM4100 = 1,
+    FDX_A = 2,
+    FDX_B = 3
+}
+
 export class FrameMetadata {
     private static readonly queryKeyMapping: Record<string, string> = {
         /* Populated by FrameProvider */
@@ -53,6 +61,7 @@ export class FrameMetadata {
         f: 'flapState',
         c: 'frameClassificationHex',
         rs: 'rfidReadStatus',
+        rp: 'rfidReadProtocol',
         ro: 'rfidReadOutdoor',
         rf: 'rfidReadFrequency',
         ra: 'rfidReadAge',
@@ -113,6 +122,7 @@ export class FrameMetadata {
     frameClassification: FrameClassification;
     timestamp?: Date;
     rfidReadStatus?: RfidReadStatus;
+    rfidReadProtocol?: RfidReadProtocol;
     rfidReadOutdoor?: boolean;
     rfidReadCode? : string;
     rfidReadAge? : number;
@@ -129,6 +139,7 @@ export class FrameMetadata {
         this.eventClassificationChanged = Boolean(initObj.eventClassificationChanged);
         this.frameClassification = new FrameClassification(initObj.frameClassificationHex);
         this.rfidReadStatus = Number(initObj.rfidReadStatus ?? RfidReadStatus.Inactive);
+        this.rfidReadProtocol = Number(initObj.rfidReadProtocol ?? RfidReadProtocol.Unknown);
         this.rfidReadOutdoor = Boolean(Number(initObj.rfidReadOutdoor));
         this.rfidReadCode = initObj.rfidReadCode;
         this.rfidReadAge = initObj.rfidReadAge;
