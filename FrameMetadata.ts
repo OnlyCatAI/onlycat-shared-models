@@ -92,6 +92,18 @@ export class FrameMetadata {
         return decoded;
     }
 
+    static decodeQueryLines(payload: string): FrameMetadata[] {
+        return payload
+            .split(/\r?\n/)
+            .map((line) => line.trim())
+            .filter((line) => line.length > 0)
+            .map((line) => {
+                const rawQuery = Object.fromEntries(new URLSearchParams(line));
+                const decoded = FrameMetadata.decodeQuery(rawQuery);
+                return new FrameMetadata(decoded);
+            });
+    }
+
     motionSensorState: MotionSensorState;
     lockState: LockState;
     flapState: FlapState;
