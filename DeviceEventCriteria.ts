@@ -1,11 +1,16 @@
 import { EventClassification, DeviceEvent } from './DeviceEvent';
 
 export interface DeviceEventCriteria {
+    deviceId?: string;
     beforeGlobalId?: number;
-    eventClassification?: EventClassification;
+    eventClassification?: EventClassification | EventClassification[];
+    eventManualClassification?: EventClassification | EventClassification[] | null;
     isStarred?: boolean;
     isContraband?: boolean;
+    sampling?: number;
 }
+
+export type UserDeviceEventCriteria = Omit<DeviceEventCriteria, 'deviceId' | 'eventManualClassification' | 'sampling'>;
 
 export class DeviceEventCriteriaHelper {
     /**
@@ -16,7 +21,29 @@ export class DeviceEventCriteriaHelper {
         
         // Check eventClassification if specified
         if (criteria.eventClassification !== undefined) {
-            if (event.eventClassification !== criteria.eventClassification) {
+            const classifications = Array.isArray(criteria.eventClassification)
+                ? criteria.eventClassification
+                : [criteria.eventClassification];
+            if (!classifications.includes(event.eventClassification as EventClassification)) {
+                return false;
+            }
+        }
+
+        if (criteria.eventManualClassification === null) {
+            if (event.eventManualClassification !== null) {
+                return false;
+            }
+        } else if (criteria.eventManualClassification !== undefined) {
+            const manualClassifications = Array.isArray(criteria.eventManualClassification)
+                ? criteria.eventManualClassification
+                : [criteria.eventManualClassification];
+            if (!manualClassifications.includes(event.eventManualClassification as EventClassification)) {
+                return false;
+            }
+        }
+
+        if (criteria.sampling !== undefined && criteria.sampling > 1) {
+            if (event.globalId === undefined || event.globalId % criteria.sampling !== 0) {
                 return false;
             }
         }
@@ -24,7 +51,7 @@ export class DeviceEventCriteriaHelper {
         // Add checks for other criteria properties as needed
         // This will automatically handle any future criteria properties
         for (const [key, value] of Object.entries(criteria)) {
-            if (key === 'beforeGlobalId') continue; // Skip pagination parameter
+            if (key === 'beforeGlobalId' || key === 'eventClassification' || key === 'eventManualClassification' || key === 'sampling') continue; // Skip pagination/filter helpers handled above
             if (value !== undefined && event[key] !== value) {
                 return false;
             }
