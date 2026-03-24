@@ -18,6 +18,7 @@ export class EventSummary {
     eventId: number;
     processedFrameCount: number;
     subevents: SubEvent[];
+    localisedDescription?: string | null;
     [key: string]: any; // Allow any additional properties
 
     constructor(initObj: Partial<EventSummary> & Record<string, any>) {
@@ -31,6 +32,7 @@ export class EventSummary {
             direction: subevent.direction,
             action: subevent.action
         }));
+        this.localisedDescription = initObj.localisedDescription ?? null;
 
         // Assign other properties from initObj to this instance
         for (const key in initObj) {
