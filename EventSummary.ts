@@ -2,12 +2,28 @@ export type SubEventDirection = "INWARD" | "OUTWARD";
 export type SubEventAction = "PEEK" | "TRANSIT" | "DENY" | "BREACH";
 export type RfidCodeSubstitutionKey = `$${number}`;
 
-export interface SubEvent {
+export class SubEvent {
     startFrameIndex: number;
     endFrameIndex: number;
     rfidCode: string | null;
     direction: SubEventDirection;
     action: SubEventAction;
+
+    [key: string]: any; // Allow any additional properties
+
+    constructor(initObj: Partial<SubEvent> & Record<string, any>) {
+        this.startFrameIndex = Number(initObj.startFrameIndex);
+        this.endFrameIndex = Number(initObj.endFrameIndex);
+        this.rfidCode = initObj.rfidCode ?? null;
+        this.direction = initObj.direction!;
+        this.action = initObj.action!;
+
+        for (const key in initObj) {
+            if (initObj.hasOwnProperty(key) && !this.hasOwnProperty(key)) {
+                this[key] = initObj[key];
+            }
+        }
+    }
 }
 
 export interface EventSummaryLocalisedDescription {
@@ -30,13 +46,7 @@ export class EventSummary {
         this.deviceId = initObj.deviceId!;
         this.eventId = initObj.eventId!;
         this.processedFrameCount = initObj.processedFrameCount ?? 0;
-        this.subevents = (initObj.subevents ?? []).map((subevent) => ({
-            startFrameIndex: Number(subevent.startFrameIndex),
-            endFrameIndex: Number(subevent.endFrameIndex),
-            rfidCode: subevent.rfidCode ?? null,
-            direction: subevent.direction,
-            action: subevent.action
-        }));
+        this.subevents = (initObj.subevents ?? []).map((subevent) => new SubEvent(subevent));
 
         // Assign other properties from initObj to this instance
         for (const key in initObj) {
