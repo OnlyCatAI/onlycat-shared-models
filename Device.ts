@@ -37,9 +37,28 @@ export class Device {
         }
     }
 
+    static expandMacId(macIdOrDeviceId: string): string {
+        let macId = macIdOrDeviceId.trim().toUpperCase().replace(/^OC-/, '');
+
+        // Handle short 4-character MAC IDs by adding the known manufacturing prefix.
+        if (/^[0-9A-F]{4}$/.test(macId)) {
+            if (macId.startsWith('1')) {
+                macId = `8C1F6448${macId}`;
+            } else {
+                macId = `0CBFB490${macId}`;
+            }
+        }
+
+        return macId;
+    }
+
+    static toDeviceId(macIdOrDeviceId: string): string {
+        return `OC-${Device.expandMacId(macIdOrDeviceId)}`;
+    }
+
     get macId(): string {
         // Strip prefix of a device ID such as OC-010203040506 to get the MAC ID 010203040506
-        const macIdHex: string = this.deviceId.replace(/^OC-/, '');
+        const macIdHex: string = Device.expandMacId(this.deviceId);
 
         // Format the hex string into a MAC ID (xx:xx:xx:xx:xx:xx)
         return macIdHex.match(/.{1,2}/g)!.join(':');
