@@ -5,6 +5,7 @@ export interface DeviceEventCriteria {
     beforeGlobalId?: number;
     eventClassification?: EventClassification | EventClassification[];
     eventManualClassification?: EventClassification | EventClassification[] | null;
+    rfidCode?: string | string[];
     isStarred?: boolean;
     isContraband?: boolean;
     sampling?: number;
@@ -47,11 +48,20 @@ export class DeviceEventCriteriaHelper {
                 return false;
             }
         }
+
+        if (criteria.rfidCode !== undefined) {
+            const requestedCodes = Array.isArray(criteria.rfidCode) ? criteria.rfidCode : [criteria.rfidCode];
+            const eventRfidCodes = event.rfidCodes ?? [];
+
+            if (!requestedCodes.some(rfidCode => eventRfidCodes.includes(rfidCode))) {
+                return false;
+            }
+        }
         
         // Add checks for other criteria properties as needed
         // This will automatically handle any future criteria properties
         for (const [key, value] of Object.entries(criteria)) {
-            if (key === 'beforeGlobalId' || key === 'eventClassification' || key === 'eventManualClassification' || key === 'sampling') continue; // Skip pagination/filter helpers handled above
+            if (key === 'beforeGlobalId' || key === 'eventClassification' || key === 'eventManualClassification' || key === 'rfidCode' || key === 'sampling') continue; // Skip pagination/filter helpers handled above
             if (value !== undefined && event[key] !== value) {
                 return false;
             }
