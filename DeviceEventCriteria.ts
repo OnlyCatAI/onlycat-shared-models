@@ -1,8 +1,9 @@
-import { EventClassification, DeviceEvent } from './DeviceEvent';
+import { EventClassification, DeviceEvent, EventTriggerSource } from './DeviceEvent';
 
 export interface DeviceEventCriteria {
     deviceId?: string;
     beforeGlobalId?: number;
+    eventTriggerSource?: EventTriggerSource | EventTriggerSource[];
     eventClassification?: EventClassification | EventClassification[];
     eventManualClassification?: EventClassification | EventClassification[] | null;
     rfidCode?: string | string[];
@@ -43,6 +44,15 @@ export class DeviceEventCriteriaHelper {
             }
         }
 
+        if (criteria.eventTriggerSource !== undefined) {
+            const triggerSources = Array.isArray(criteria.eventTriggerSource)
+                ? criteria.eventTriggerSource
+                : [criteria.eventTriggerSource];
+            if (!triggerSources.includes(event.eventTriggerSource as EventTriggerSource)) {
+                return false;
+            }
+        }
+
         if (criteria.sampling !== undefined && criteria.sampling > 1) {
             if (event.globalId === undefined || event.globalId % criteria.sampling !== 0) {
                 return false;
@@ -61,7 +71,7 @@ export class DeviceEventCriteriaHelper {
         // Add checks for other criteria properties as needed
         // This will automatically handle any future criteria properties
         for (const [key, value] of Object.entries(criteria)) {
-            if (key === 'beforeGlobalId' || key === 'eventClassification' || key === 'eventManualClassification' || key === 'rfidCode' || key === 'sampling') continue; // Skip pagination/filter helpers handled above
+            if (key === 'beforeGlobalId' || key === 'eventClassification' || key === 'eventManualClassification' || key === 'eventTriggerSource' || key === 'rfidCode' || key === 'sampling') continue; // Skip pagination/filter helpers handled above
             if (value !== undefined && event[key] !== value) {
                 return false;
             }
