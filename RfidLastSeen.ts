@@ -14,9 +14,9 @@ export class RfidLastSeen {
         this.deviceId = initObj.deviceId!;
         this.rfidCode = initObj.rfidCode!;
         this.eventId = initObj.eventId!;
-        this.eventTimestamp = initObj.eventTimestamp ?? null;
+        this.eventTimestamp = initObj.eventTimestamp ? new Date(initObj.eventTimestamp) : null;
         this.lastSubevent = initObj.lastSubevent ? new SubEvent(initObj.lastSubevent) : null;
-        this.updatedAt = initObj.updatedAt ?? null;
+        this.updatedAt = new Date(initObj.updatedAt!);
 
         for (const key in initObj) {
             if (initObj.hasOwnProperty(key) && !this.hasOwnProperty(key)) {
