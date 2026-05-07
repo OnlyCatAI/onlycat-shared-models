@@ -2,6 +2,7 @@ export enum FeedbackType {
     Confirmed = 'confirmed',
     FalseAlarm = 'false_alarm',
     MissedContraband = 'missed_contraband',
+    IncorrectTimeline = 'incorrect_timeline',
     OtherIssue = 'other_issue'
 }
 
