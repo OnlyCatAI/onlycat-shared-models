@@ -7,6 +7,9 @@ export class RfidLastSeen {
     eventTimestamp: Date | null;
     lastSubevent: SubEvent | null;
     updatedAt: Date | null;
+    hiddenAt: Date | null;
+    hiddenEventId: number | null;
+    hiddenByUserId: number | null;
 
     [key: string]: any;
 
@@ -17,6 +20,9 @@ export class RfidLastSeen {
         this.eventTimestamp = initObj.eventTimestamp ? new Date(initObj.eventTimestamp) : null;
         this.lastSubevent = initObj.lastSubevent ? new SubEvent(initObj.lastSubevent) : null;
         this.updatedAt = new Date(initObj.updatedAt!);
+        this.hiddenAt = initObj.hiddenAt ? new Date(initObj.hiddenAt) : null;
+        this.hiddenEventId = initObj.hiddenEventId ?? null;
+        this.hiddenByUserId = initObj.hiddenByUserId ?? null;
 
         for (const key in initObj) {
             if (initObj.hasOwnProperty(key) && !this.hasOwnProperty(key)) {
