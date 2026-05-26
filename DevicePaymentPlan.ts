@@ -1,10 +1,10 @@
 export enum PaymentPlanState {
-    Pending = 'pending',
-    Required = 'required',
-    Active = 'active',
-    Lifetime = 'lifetime',
-    Reviewing = 'reviewing',
-    Invalid = 'invalid',
+    Pending = "pending",
+    Required = "required",
+    Active = "active",
+    Lifetime = "lifetime",
+    Reviewing = "reviewing",
+    Invalid = "invalid"
 }
 
 export class DevicePaymentPlan {

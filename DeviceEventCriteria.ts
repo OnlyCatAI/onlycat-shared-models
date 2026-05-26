@@ -1,4 +1,4 @@
-import { EventClassification, DeviceEvent, EventTriggerSource } from './DeviceEvent';
+import { EventClassification, DeviceEvent, EventTriggerSource } from "./DeviceEvent";
 
 export interface DeviceEventCriteria {
     deviceId?: string;
@@ -12,7 +12,7 @@ export interface DeviceEventCriteria {
     sampling?: number;
 }
 
-export type UserDeviceEventCriteria = Omit<DeviceEventCriteria, 'deviceId' | 'eventManualClassification' | 'sampling'>;
+export type UserDeviceEventCriteria = Omit<DeviceEventCriteria, "deviceId" | "eventManualClassification" | "sampling">;
 
 export class DeviceEventCriteriaHelper {
     /**
@@ -20,7 +20,7 @@ export class DeviceEventCriteriaHelper {
      */
     static eventMatches(event: DeviceEvent, criteria?: DeviceEventCriteria): boolean {
         if (!criteria) return true;
-        
+
         // Check eventClassification if specified
         if (criteria.eventClassification !== undefined) {
             const classifications = Array.isArray(criteria.eventClassification)
@@ -63,20 +63,28 @@ export class DeviceEventCriteriaHelper {
             const requestedCodes = Array.isArray(criteria.rfidCode) ? criteria.rfidCode : [criteria.rfidCode];
             const eventRfidCodes = event.rfidCodes ?? [];
 
-            if (!requestedCodes.some(rfidCode => eventRfidCodes.includes(rfidCode))) {
+            if (!requestedCodes.some((rfidCode) => eventRfidCodes.includes(rfidCode))) {
                 return false;
             }
         }
-        
+
         // Add checks for other criteria properties as needed
         // This will automatically handle any future criteria properties
         for (const [key, value] of Object.entries(criteria)) {
-            if (key === 'beforeGlobalId' || key === 'eventClassification' || key === 'eventManualClassification' || key === 'eventTriggerSource' || key === 'rfidCode' || key === 'sampling') continue; // Skip pagination/filter helpers handled above
+            if (
+                key === "beforeGlobalId" ||
+                key === "eventClassification" ||
+                key === "eventManualClassification" ||
+                key === "eventTriggerSource" ||
+                key === "rfidCode" ||
+                key === "sampling"
+            )
+                continue; // Skip pagination/filter helpers handled above
             if (value !== undefined && event[key] !== value) {
                 return false;
             }
         }
-        
+
         return true;
     }
 }

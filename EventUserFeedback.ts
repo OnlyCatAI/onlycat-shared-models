@@ -1,16 +1,16 @@
 export enum FeedbackType {
-    Confirmed = 'confirmed',
-    FalseAlarm = 'false_alarm',
-    MissedContraband = 'missed_contraband',
-    OtherIssue = 'other_issue'
+    Confirmed = "confirmed",
+    FalseAlarm = "false_alarm",
+    MissedContraband = "missed_contraband",
+    OtherIssue = "other_issue"
 }
 
 export enum FeedbackResolution {
-    Unresolved = 'unresolved',
-    TrainingAdded = 'training_added',
-    OtherResolution = 'other_resolution',
-    CustomerContacted = 'customer_contacted',
-    NoAction = 'no_action'
+    Unresolved = "unresolved",
+    TrainingAdded = "training_added",
+    OtherResolution = "other_resolution",
+    CustomerContacted = "customer_contacted",
+    NoAction = "no_action"
 }
 
 export class EventUserFeedback {

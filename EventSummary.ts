@@ -93,9 +93,7 @@ export class EventSummary {
     }
 
     get rfidCodeSubstitutionMap(): Record<string, RfidCodeSubstitutionKey> {
-        return Object.fromEntries(
-            this.rfidCodeSubstitutionEntries.map(([key, rfidCode]) => [rfidCode, key])
-        );
+        return Object.fromEntries(this.rfidCodeSubstitutionEntries.map(([key, rfidCode]) => [rfidCode, key]));
     }
 
     getRfidCodeSubstitutionKey(rfidCode: string | null | undefined): RfidCodeSubstitutionKey | null {
@@ -120,15 +118,9 @@ export class EventSummary {
     }
 
     getSubeventKey(subevent: Pick<SubEvent, "rfidCode" | "action" | "direction">): string {
-        const rfidCodeKey =
-            this.getRfidCodeSubstitutionKey(subevent.rfidCode) ??
-            EventSummary.missingRfidCodeKey;
+        const rfidCodeKey = this.getRfidCodeSubstitutionKey(subevent.rfidCode) ?? EventSummary.missingRfidCodeKey;
 
-        return [
-            rfidCodeKey,
-            subevent.action.toLowerCase(),
-            subevent.direction.toLowerCase()
-        ].join("-");
+        return [rfidCodeKey, subevent.action.toLowerCase(), subevent.direction.toLowerCase()].join("-");
     }
 
     get summaryKey(): string {

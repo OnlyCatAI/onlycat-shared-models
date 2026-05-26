@@ -1,4 +1,4 @@
-import { Snapshot } from './Snapshot';
+import { Snapshot } from "./Snapshot";
 
 export class TrainingSnapshot extends Snapshot {
     label?: string;

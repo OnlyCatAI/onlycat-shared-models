@@ -5,7 +5,7 @@ export class User {
     name: string | null;
     description: string | null;
     avatarUrl: string | null;
-    userLevel?: 'ADMIN' | null;
+    userLevel?: "ADMIN" | null;
 
     [key: string]: any; // Allow any additional properties
 

@@ -1,8 +1,7 @@
 import { EventClassification, EventTriggerSource } from "./DeviceEvent";
 import { FlapState, MotionSensorState } from "./FrameMetadata";
 
-export interface TransitPolicyRuleCriteria
-{
+export interface TransitPolicyRuleCriteria {
     eventTriggerSource?: EventTriggerSource | EventTriggerSource[];
     eventClassification?: EventClassification | EventClassification[];
     rfidCode?: string | string[];
@@ -11,26 +10,22 @@ export interface TransitPolicyRuleCriteria
     flapState?: FlapState | FlapState[];
 }
 
-export interface TransitPolicyRuleAction
-{
+export interface TransitPolicyRuleAction {
     lock?: boolean;
     sound?: string;
     lockoutDuration?: number;
     final?: boolean;
 }
 
-export interface TransitPolicyUxOnActivate
-{
+export interface TransitPolicyUxOnActivate {
     sound?: string;
 }
 
-export interface TransitPolicyUx
-{
+export interface TransitPolicyUx {
     onActivate?: TransitPolicyUxOnActivate;
 }
 
-export class TransitPolicyRule
-{
+export class TransitPolicyRule {
     criteria?: TransitPolicyRuleCriteria;
     action?: TransitPolicyRuleAction;
     [key: string]: any; // Allow any additional properties
@@ -63,7 +58,7 @@ export class TransitPolicy {
             ...(initObj.ux ?? {}),
             onActivate: {
                 ...(initObj.ux?.onActivate ?? {}),
-                sound: initObj.ux?.onActivate?.sound ?? 'coin'
+                sound: initObj.ux?.onActivate?.sound ?? "coin"
             }
         };
 

@@ -31,8 +31,7 @@ export enum EventClassification {
     RemoteUnlock = 10
 }
 
-export enum RfidReadStatus
-{
+export enum RfidReadStatus {
     Inactive = -1,
     None = 0,
     Valid,
@@ -40,8 +39,7 @@ export enum RfidReadStatus
     Recovered
 }
 
-export enum RfidReadProtocol
-{
+export enum RfidReadProtocol {
     Unknown = 0,
     EM4100 = 1,
     FDX_A = 2,
@@ -51,33 +49,33 @@ export enum RfidReadProtocol
 export class FrameMetadata {
     private static readonly queryKeyMapping: Record<string, string> = {
         /* Populated by FrameProvider */
-        t: 'timestamp',
-        l: 'lockState',
-        lt: 'targetLockState',
-        m: 'motionSensorState',
-        ma: 'motionSensorAge',
-        mi: 'motionSensorIndoor',
-        mo: 'motionSensorOutdoor',
-        f: 'flapState',
-        c: 'frameClassificationHex',
-        rs: 'rfidReadStatus',
-        rp: 'rfidReadProtocol',
-        ro: 'rfidReadOutdoor',
-        rf: 'rfidReadFrequency',
-        ra: 'rfidReadAge',
-        rrt: 'rfidResonanceRampTime',
-        rrv: 'rfidResonanceRampVoltage',
-        rrm: 'rfidResonanceRampVoltageMax',
-        ri: 'rfidReadCode',
-        rsl: 'rfidReadSignalLevel',
-        rnl: 'rfidReadNoiseLevel',
+        t: "timestamp",
+        l: "lockState",
+        lt: "targetLockState",
+        m: "motionSensorState",
+        ma: "motionSensorAge",
+        mi: "motionSensorIndoor",
+        mo: "motionSensorOutdoor",
+        f: "flapState",
+        c: "frameClassificationHex",
+        rs: "rfidReadStatus",
+        rp: "rfidReadProtocol",
+        ro: "rfidReadOutdoor",
+        rf: "rfidReadFrequency",
+        ra: "rfidReadAge",
+        rrt: "rfidResonanceRampTime",
+        rrv: "rfidResonanceRampVoltage",
+        rrm: "rfidResonanceRampVoltageMax",
+        ri: "rfidReadCode",
+        rsl: "rfidReadSignalLevel",
+        rnl: "rfidReadNoiseLevel",
 
         /* Populated by ActiveEvent */
-        ets: 'eventTriggerSource',
-        ec: 'eventClassification',
-        ecc: 'eventClassificationChanged',
-        pa: 'transitPolicyAction',
-        pw: 'transitPolicyWaitState'
+        ets: "eventTriggerSource",
+        ec: "eventClassification",
+        ecc: "eventClassificationChanged",
+        pa: "transitPolicyAction",
+        pw: "transitPolicyWaitState"
     };
 
     static decodeQuery(query: Record<string, any> | undefined | null): Record<string, any> {
@@ -91,7 +89,7 @@ export class FrameMetadata {
                 value = value[value.length - 1];
             }
 
-            if (value === '') {
+            if (value === "") {
                 value = true;
             }
 
@@ -124,8 +122,8 @@ export class FrameMetadata {
     rfidReadStatus?: RfidReadStatus;
     rfidReadProtocol?: RfidReadProtocol;
     rfidReadOutdoor?: boolean;
-    rfidReadCode? : string;
-    rfidReadAge? : number;
+    rfidReadCode?: string;
+    rfidReadAge?: number;
     rfidResonanceRampTime?: number;
     rfidResonanceRampVoltage?: number;
     [key: string]: any; // Allow any additional properties

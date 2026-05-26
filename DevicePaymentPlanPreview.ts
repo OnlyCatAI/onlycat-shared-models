@@ -1,6 +1,6 @@
-import Stripe from 'stripe';
+import Stripe from "stripe";
 
-export type DevicePaymentPlanLineItemType = 'one-off' | 'proration' | 'recurring';
+export type DevicePaymentPlanLineItemType = "one-off" | "proration" | "recurring";
 
 export interface DevicePaymentPlanLineItem {
     id: string;
@@ -46,9 +46,9 @@ export class DevicePaymentPlanPreview {
      */
     get formattedTotal(): string {
         const amount = this.totalAmount / 100; // Convert from cents to dollars
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: this.invoice.currency || 'usd'
+        return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: this.invoice.currency || "usd"
         }).format(amount);
     }
 }

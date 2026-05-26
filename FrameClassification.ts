@@ -1,7 +1,7 @@
 function hexToFloatArray(hexString: string): number[] {
     const regex = /.{2}/g; // matches every 2 characters
     const hexPairs = hexString.match(regex) || []; // split into pairs of hex characters
-    const array = hexPairs.map(hex => parseInt(hex, 16) / 255); // decode and scale each pair
+    const array = hexPairs.map((hex) => parseInt(hex, 16) / 255); // decode and scale each pair
     return array;
 }
 
@@ -13,11 +13,11 @@ export class FrameClassification {
     HUMAN_ACTIVITY?: number;
 
     constructor(classificationOutputs: number[] | string) {
-        if(!classificationOutputs) {
+        if (!classificationOutputs) {
             return;
         }
 
-        if (typeof classificationOutputs === 'string') {
+        if (typeof classificationOutputs === "string") {
             classificationOutputs = hexToFloatArray(classificationOutputs);
         }
 
@@ -37,4 +37,4 @@ export class FrameClassification {
 
         return sortedPairs;
     }
-};
+}

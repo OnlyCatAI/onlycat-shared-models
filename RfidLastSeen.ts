@@ -1,4 +1,4 @@
-import { SubEvent } from './EventSummary';
+import { SubEvent } from "./EventSummary";
 
 export class RfidLastSeen {
     deviceId: string;
