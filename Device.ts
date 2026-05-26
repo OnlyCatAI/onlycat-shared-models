@@ -38,7 +38,7 @@ export class Device {
     }
 
     static expandMacId(macIdOrDeviceId: string): string {
-        let macId = macIdOrDeviceId.trim().toUpperCase().replace(/^OC-/, "");
+        let macId = macIdOrDeviceId.trim().toUpperCase().replace(/^OC-/, "").replace(/:/g, "");
 
         // Handle short 4-character MAC IDs by adding the known manufacturing prefix.
         if (/^[0-9A-F]{4}$/.test(macId)) {
