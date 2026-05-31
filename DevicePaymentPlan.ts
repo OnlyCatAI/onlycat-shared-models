@@ -14,6 +14,9 @@ export class DevicePaymentPlan {
     dateStart: Date | null;
     stripeSubscriptionId: string | null;
     stripeCustomerId: string | null;
+    notes: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
     [key: string]: any; // Allow any additional properties
 
     constructor(initObj: Partial<DevicePaymentPlan> & Record<string, any>) {
@@ -23,6 +26,9 @@ export class DevicePaymentPlan {
         this.dateStart = initObj.dateStart ? new Date(initObj.dateStart) : null;
         this.stripeSubscriptionId = initObj.stripeSubscriptionId || null;
         this.stripeCustomerId = initObj.stripeCustomerId || null;
+        this.notes = initObj.notes || null;
+        this.createdAt = initObj.createdAt ? new Date(initObj.createdAt) : null;
+        this.updatedAt = initObj.updatedAt ? new Date(initObj.updatedAt) : null;
 
         // Assign other properties from initObj to this instance
         for (const key in initObj) {
