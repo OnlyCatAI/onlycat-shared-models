@@ -41,10 +41,10 @@ export const DEFAULT_PUSH_NOTIFICATION_RULES: PushNotificationRules = {
     [PushNotificationRuleKeys.TRANSIT_INWARD]: PushNotificationRuleValues.ON,
     [PushNotificationRuleKeys.TRANSIT_OUTWARD]: PushNotificationRuleValues.ON,
     [PushNotificationRuleKeys.PEEK_INWARD]: PushNotificationRuleValues.ON,
-    [PushNotificationRuleKeys.PEEK_OUTWARD]: PushNotificationRuleValues.OFF,
-    [PushNotificationRuleKeys.BREACH_INWARD]: PushNotificationRuleValues.CRITICAL,
-    [PushNotificationRuleKeys.BREACH_OUTWARD]: PushNotificationRuleValues.CRITICAL,
-    [PushNotificationRuleKeys.CONTRABAND]: PushNotificationRuleValues.ON
+    [PushNotificationRuleKeys.PEEK_OUTWARD]: PushNotificationRuleValues.ON,
+    [PushNotificationRuleKeys.BREACH_INWARD]: PushNotificationRuleValues.ON,
+    [PushNotificationRuleKeys.BREACH_OUTWARD]: PushNotificationRuleValues.ON,
+    [PushNotificationRuleKeys.CONTRABAND]: PushNotificationRuleValues.CRITICAL
 };
 
 export const DEFAULT_PUSH_NOTIFICATION_QUIET_HOURS: PushNotificationQuietHours = {
