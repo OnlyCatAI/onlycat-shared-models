@@ -14,6 +14,9 @@ export class DevicePaymentPlan {
     dateStart: Date | null;
     stripeSubscriptionId: string | null;
     stripeCustomerId: string | null;
+    paymentCount: number;
+    paymentDuration: number;
+    paymentTotal: number;
     notes: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
@@ -26,6 +29,9 @@ export class DevicePaymentPlan {
         this.dateStart = initObj.dateStart ? new Date(initObj.dateStart) : null;
         this.stripeSubscriptionId = initObj.stripeSubscriptionId || null;
         this.stripeCustomerId = initObj.stripeCustomerId || null;
+        this.paymentCount = initObj.paymentCount ?? 0;
+        this.paymentDuration = initObj.paymentDuration ?? 0;
+        this.paymentTotal = initObj.paymentTotal ?? 0;
         this.notes = initObj.notes || null;
         this.createdAt = initObj.createdAt ? new Date(initObj.createdAt) : null;
         this.updatedAt = initObj.updatedAt ? new Date(initObj.updatedAt) : null;
