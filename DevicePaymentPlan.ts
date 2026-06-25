@@ -19,6 +19,7 @@ export class DevicePaymentPlan {
     paymentDuration: number;
     paymentTotal: number;
     notes: string | null;
+    changeUserId: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     [key: string]: any; // Allow any additional properties
@@ -35,6 +36,7 @@ export class DevicePaymentPlan {
         this.paymentDuration = initObj.paymentDuration ?? 0;
         this.paymentTotal = initObj.paymentTotal ?? 0;
         this.notes = initObj.notes || null;
+        this.changeUserId = initObj.changeUserId ?? null;
         this.createdAt = initObj.createdAt ? new Date(initObj.createdAt) : null;
         this.updatedAt = initObj.updatedAt ? new Date(initObj.updatedAt) : null;
 

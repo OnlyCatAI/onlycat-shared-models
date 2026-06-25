@@ -8,6 +8,7 @@ export class PaymentHistory {
     stripeSubscriptionId: string | null;
     stripeCustomerId: string | null;
     notes: string | null;
+    changeUserId: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     [key: string]: any; // Allow any additional properties
@@ -22,6 +23,7 @@ export class PaymentHistory {
         this.stripeSubscriptionId = initObj.stripeSubscriptionId || null;
         this.stripeCustomerId = initObj.stripeCustomerId || null;
         this.notes = initObj.notes || null;
+        this.changeUserId = initObj.changeUserId ?? null;
         this.createdAt = initObj.createdAt ? new Date(initObj.createdAt) : null;
         this.updatedAt = initObj.updatedAt ? new Date(initObj.updatedAt) : null;
 
