@@ -10,11 +10,13 @@ export interface TrainingSnapshotCriteria {
 export class TrainingSnapshot extends Snapshot {
     label?: string;
     cameraClarity?: number;
+    lastUpdated?: Date;
 
     constructor(initObj: Partial<TrainingSnapshot> & Record<string, any>) {
         super(initObj);
 
         this.label = initObj.label;
         this.cameraClarity = initObj.cameraClarity;
+        this.lastUpdated = initObj.lastUpdated ? new Date(initObj.lastUpdated) : undefined;
     }
 }
