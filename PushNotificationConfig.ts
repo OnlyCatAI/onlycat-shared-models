@@ -29,8 +29,11 @@ export interface PushNotificationQuietHours {
 
 export type PushNotificationRules = Record<PushNotificationRuleKey, PushNotificationRuleValue>;
 
+export const DEFAULT_PUSH_NOTIFICATION_LOCALE = "en";
+
 export interface PushNotificationConfigJson {
     schemaVersion: 1;
+    locale: string;
     pushEnabled: boolean;
     rules: PushNotificationRules;
     quietHours: PushNotificationQuietHours;
@@ -56,6 +59,7 @@ export const DEFAULT_PUSH_NOTIFICATION_QUIET_HOURS: PushNotificationQuietHours =
 
 export const DEFAULT_PUSH_NOTIFICATION_CONFIG: PushNotificationConfigJson = {
     schemaVersion: 1,
+    locale: DEFAULT_PUSH_NOTIFICATION_LOCALE,
     pushEnabled: true,
     rules: DEFAULT_PUSH_NOTIFICATION_RULES,
     quietHours: DEFAULT_PUSH_NOTIFICATION_QUIET_HOURS
@@ -64,6 +68,7 @@ export const DEFAULT_PUSH_NOTIFICATION_CONFIG: PushNotificationConfigJson = {
 export class PushNotificationConfig implements PushNotificationConfigJson {
     appToken?: string;
     schemaVersion: 1;
+    locale: string;
     pushEnabled: boolean;
     rules: PushNotificationRules;
     quietHours: PushNotificationQuietHours;
@@ -73,6 +78,7 @@ export class PushNotificationConfig implements PushNotificationConfigJson {
     constructor(initObj: Partial<PushNotificationConfig> & Record<string, any>) {
         this.appToken = initObj.appToken;
         this.schemaVersion = 1;
+        this.locale = initObj.locale ?? DEFAULT_PUSH_NOTIFICATION_CONFIG.locale;
         this.pushEnabled = initObj.pushEnabled ?? DEFAULT_PUSH_NOTIFICATION_CONFIG.pushEnabled;
         this.rules = {
             ...DEFAULT_PUSH_NOTIFICATION_RULES,
@@ -96,6 +102,7 @@ export class PushNotificationConfig implements PushNotificationConfigJson {
         return {
             ...config,
             schemaVersion: 1,
+            locale: this.locale,
             pushEnabled: this.pushEnabled,
             rules: this.rules,
             quietHours: this.quietHours
