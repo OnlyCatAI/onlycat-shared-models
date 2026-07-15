@@ -75,7 +75,8 @@ export class FrameMetadata {
         ec: "eventClassification",
         ecc: "eventClassificationChanged",
         pa: "transitPolicyAction",
-        pw: "transitPolicyWaitState"
+        pw: "transitPolicyWaitState",
+        lr: "lockoutRemaining"
     };
 
     static decodeQuery(query: Record<string, any> | undefined | null): Record<string, any> {
@@ -126,6 +127,8 @@ export class FrameMetadata {
     rfidReadAge?: number;
     rfidResonanceRampTime?: number;
     rfidResonanceRampVoltage?: number;
+    /** Remaining lockout time in ms, as reported by the device at frame time */
+    lockoutRemaining?: number;
     [key: string]: any; // Allow any additional properties
 
     constructor(initObj: Partial<FrameMetadata> & Record<string, any>) {
@@ -143,6 +146,7 @@ export class FrameMetadata {
         this.rfidReadAge = initObj.rfidReadAge;
         this.rfidResonanceRampTime = Number(initObj.rfidResonanceRampTime);
         this.rfidResonanceRampVoltage = Number(initObj.rfidResonanceRampVoltage);
+        this.lockoutRemaining = initObj.lockoutRemaining !== undefined ? Number(initObj.lockoutRemaining) : undefined;
 
         if (initObj.timestamp) {
             this.timestamp = new Date(Number(initObj.timestamp) * 1000);
