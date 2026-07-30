@@ -6,8 +6,12 @@ export interface SnapshotCriteria {
     classificationLabel?: string | string[];
     /** Restrict to snapshots whose highest-scoring edge class is none of these. */
     excludeClassificationLabel?: string | string[];
-    /** Inclusive lower bound on the edge NO_CAT score, 0..1. */
-    minClassificationNoCat?: number;
+    /**
+     * Inclusive upper bound on the edge NO_CAT score, 0..1. An upper bound is the
+     * useful direction: almost every snapshot is an empty tunnel scoring ~1.0, so
+     * capping NO_CAT is what leaves the frames worth looking at.
+     */
+    maxClassificationNoCat?: number;
     /** true: only scored snapshots; false: only snapshots still awaiting a backfill. */
     hasClassification?: boolean;
 }
