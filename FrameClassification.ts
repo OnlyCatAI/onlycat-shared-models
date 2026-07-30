@@ -37,4 +37,23 @@ export class FrameClassification {
 
         return sortedPairs;
     }
+
+    /**
+     * Highest-scoring class, or undefined when no score is populated. Unlike
+     * `topK` this tolerates a short/absent score vector, since it is what gets
+     * persisted as `snapshot.classification_label`.
+     */
+    get topLabel(): string | undefined {
+        let topLabel: string | undefined;
+        let topScore = -Infinity;
+
+        for (const [label, score] of Object.entries(this)) {
+            if (typeof score === "number" && Number.isFinite(score) && score > topScore) {
+                topScore = score;
+                topLabel = label;
+            }
+        }
+
+        return topLabel;
+    }
 }
