@@ -4,8 +4,6 @@ export interface SnapshotCriteria {
     deviceId?: string;
     /** Restrict to snapshots whose highest-scoring edge class is one of these. */
     classificationLabel?: string | string[];
-    /** Restrict to snapshots whose highest-scoring edge class is none of these. */
-    excludeClassificationLabel?: string | string[];
     /**
      * Inclusive upper bound on the edge NO_CAT score, 0..1. An upper bound is the
      * useful direction: almost every snapshot is an empty tunnel scoring ~1.0, so
