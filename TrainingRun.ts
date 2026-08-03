@@ -27,6 +27,8 @@ export interface TrainingRunConfig {
     qatEpochs?: number;
     augment?: boolean;
     labelSmoothing?: number;
+    /** Warm-start from this completed run's model_qat_float.keras instead of ImageNet. */
+    initFromRunId?: number;
     notes?: string;
 }
 
