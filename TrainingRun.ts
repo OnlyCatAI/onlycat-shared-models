@@ -25,6 +25,8 @@ export interface TrainingRunConfig {
     learningRate?: number;
     fineTuneLayers?: number;
     qatEpochs?: number;
+    /** Fraction of the QAT budget after which activation ranges stop updating; 0 disables. */
+    qatFreezeRangesAfter?: number;
     labelSmoothing?: number;
     /** Warm-start from this completed run's model_qat_float.keras instead of ImageNet. */
     initFromRunId?: number;
