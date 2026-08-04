@@ -142,7 +142,18 @@ export class FrameMetadata {
         this.rfidReadStatus = Number(initObj.rfidReadStatus ?? RfidReadStatus.Inactive);
         this.rfidReadProtocol = Number(initObj.rfidReadProtocol ?? RfidReadProtocol.Unknown);
         this.rfidReadOutdoor = Boolean(Number(initObj.rfidReadOutdoor));
-        this.rfidReadCode = initObj.rfidReadCode;
+        // Firmware emits `ri=` (empty) while an RFID read is in flight but
+        // undecoded; decodeQuery's ""->true flag rule (for `&ecc`) then turns
+        // that into boolean true. An absent code must be absent - a truthy
+        // non-string here poisoned event summaries (TypeError on .trim,
+        // ~116 events stuck in permanent retry, 2026-08-04) and could leak
+        // `true` into updateEventRfid. Numbers are stringified defensively.
+        this.rfidReadCode =
+            typeof initObj.rfidReadCode === "string"
+                ? initObj.rfidReadCode
+                : typeof initObj.rfidReadCode === "number"
+                  ? String(initObj.rfidReadCode)
+                  : undefined;
         this.rfidReadAge = initObj.rfidReadAge;
         this.rfidResonanceRampTime = Number(initObj.rfidResonanceRampTime);
         this.rfidResonanceRampVoltage = Number(initObj.rfidResonanceRampVoltage);
