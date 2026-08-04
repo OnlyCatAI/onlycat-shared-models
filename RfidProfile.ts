@@ -1,9 +1,18 @@
+export const RFID_PROFILE_SEX_VALUES = ["MALE", "FEMALE"] as const;
+export type RfidProfileSex = typeof RFID_PROFILE_SEX_VALUES[number];
+
 export class RfidProfile {
     rfidCode: string;
     userId: number;
     label: string;
     version: number;
     createdAt: Date;
+    /** Pet date of birth (date-only, no time component), or null when not set. */
+    dateOfBirth?: Date | null;
+    /** Pet sex, or null when not set. */
+    sex?: RfidProfileSex | null;
+    /** Timestamp of the last avatar upload; null when the profile has no avatar. */
+    avatarUpdatedAt?: Date | null;
 
     [key: string]: any; // Allow any additional properties
 
