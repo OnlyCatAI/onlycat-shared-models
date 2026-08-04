@@ -25,7 +25,6 @@ export interface TrainingRunConfig {
     learningRate?: number;
     fineTuneLayers?: number;
     qatEpochs?: number;
-    augment?: boolean;
     labelSmoothing?: number;
     /** Warm-start from this completed run's model_qat_float.keras instead of ImageNet. */
     initFromRunId?: number;
