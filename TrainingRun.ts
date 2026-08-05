@@ -57,6 +57,8 @@ export class TrainingRun {
     launchedAt: Date | null;
     startedAt: Date | null;
     completedAt: Date | null;
+    /** Soft-deleted from the panel; un-archiving is a manual DB update. */
+    archivedAt: Date | null;
     lastHeartbeatAt: Date | null;
 
     constructor(initObj: Partial<TrainingRun> & Record<string, any>) {
@@ -83,6 +85,7 @@ export class TrainingRun {
         this.launchedAt = initObj.launchedAt ? new Date(initObj.launchedAt) : null;
         this.startedAt = initObj.startedAt ? new Date(initObj.startedAt) : null;
         this.completedAt = initObj.completedAt ? new Date(initObj.completedAt) : null;
+        this.archivedAt = initObj.archivedAt ? new Date(initObj.archivedAt) : null;
         this.lastHeartbeatAt = initObj.lastHeartbeatAt ? new Date(initObj.lastHeartbeatAt) : null;
     }
 }
