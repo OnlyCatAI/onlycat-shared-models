@@ -41,6 +41,8 @@ export class TrainingRun {
     phase: TrainingRunPhase | null;
     config: TrainingRunConfig;
     requestedByUserId: number | null;
+    /** Display name of the initiating user (joined from `user`; null for CLI launches). */
+    requestedByName: string | null;
     instanceId: string | null;
     instanceType: string | null;
     spot: boolean;
@@ -69,6 +71,7 @@ export class TrainingRun {
         this.phase = initObj.phase ?? null;
         this.config = initObj.config ?? {};
         this.requestedByUserId = initObj.requestedByUserId ?? null;
+        this.requestedByName = initObj.requestedByName ?? null;
         this.instanceId = initObj.instanceId ?? null;
         this.instanceType = initObj.instanceType ?? null;
         this.spot = initObj.spot ?? true;
