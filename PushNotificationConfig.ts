@@ -5,6 +5,8 @@ export const PushNotificationRuleKeys = {
     TRANSIT_OUTWARD: "transit.outward",
     PEEK_INWARD: "peek.inward",
     PEEK_OUTWARD: "peek.outward",
+    DENY_INWARD: "deny.inward",
+    DENY_OUTWARD: "deny.outward",
     BREACH_INWARD: "breach.inward",
     BREACH_OUTWARD: "breach.outward",
     CONTRABAND: "contraband"
@@ -45,6 +47,8 @@ export const DEFAULT_PUSH_NOTIFICATION_RULES: PushNotificationRules = {
     [PushNotificationRuleKeys.TRANSIT_OUTWARD]: PushNotificationRuleValues.ON,
     [PushNotificationRuleKeys.PEEK_INWARD]: PushNotificationRuleValues.ON,
     [PushNotificationRuleKeys.PEEK_OUTWARD]: PushNotificationRuleValues.ON,
+    [PushNotificationRuleKeys.DENY_INWARD]: PushNotificationRuleValues.ON,
+    [PushNotificationRuleKeys.DENY_OUTWARD]: PushNotificationRuleValues.ON,
     [PushNotificationRuleKeys.BREACH_INWARD]: PushNotificationRuleValues.ON,
     [PushNotificationRuleKeys.BREACH_OUTWARD]: PushNotificationRuleValues.ON,
     [PushNotificationRuleKeys.CONTRABAND]: PushNotificationRuleValues.CRITICAL
@@ -122,6 +126,10 @@ export function getPushNotificationRuleKey(
             return subevent.direction === "INWARD"
                 ? PushNotificationRuleKeys.PEEK_INWARD
                 : PushNotificationRuleKeys.PEEK_OUTWARD;
+        case "DENY":
+            return subevent.direction === "INWARD"
+                ? PushNotificationRuleKeys.DENY_INWARD
+                : PushNotificationRuleKeys.DENY_OUTWARD;
         case "BREACH":
             return subevent.direction === "INWARD"
                 ? PushNotificationRuleKeys.BREACH_INWARD
