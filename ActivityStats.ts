@@ -31,10 +31,6 @@ export interface RfidDailyStats {
     preyAttempts: number;
     /** 24 transit counts (in + out) by device-local hour. */
     hourHistogram: number[];
-    /** Device-local minute-of-day of the first outward transit, if any. */
-    firstExitMinute: number | null;
-    /** Device-local minute-of-day of the last inward transit, if any. */
-    lastEntryMinute: number | null;
 }
 
 /** Event-grain device totals for one local day. */
@@ -59,17 +55,15 @@ export interface DailyActivityAggregate {
     breaches: number;
     preyAttempts: number;
     hourHistogram: number[];
-    firstExitMinute: number | null;
-    lastEntryMinute: number | null;
 }
 
 /**
  * RfidDailyStats summed across devices and chips per device-local calendar
- * month ('YYYY-MM'). No first/last-exit minutes here: those are day-shaped
- * stats, and for night-active cats the local-midnight boundary makes their
- * monthly averages misleading. Months with low activeDays should be shown
- * as "no data" rather than zero - an offline device looks identical to a
- * lazy cat otherwise.
+ * month ('YYYY-MM'). Months with low activeDays should be shown as
+ * "no data" rather than zero - an offline device looks identical to a
+ * lazy cat otherwise. Time-of-day insights should be derived from the
+ * summed histogram with a circular window: day-boundary stats like
+ * "first exit" mislead for night-active cats.
  */
 export interface MonthlyActivityAggregate {
     monthLocal: string;
