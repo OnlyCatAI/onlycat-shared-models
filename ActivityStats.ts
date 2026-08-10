@@ -63,6 +63,27 @@ export interface DailyActivityAggregate {
     lastEntryMinute: number | null;
 }
 
+/**
+ * RfidDailyStats summed across devices and chips per device-local calendar
+ * month ('YYYY-MM'). No first/last-exit minutes here: those are day-shaped
+ * stats, and for night-active cats the local-midnight boundary makes their
+ * monthly averages misleading. Months with low activeDays should be shown
+ * as "no data" rather than zero - an offline device looks identical to a
+ * lazy cat otherwise.
+ */
+export interface MonthlyActivityAggregate {
+    monthLocal: string;
+    transitsIn: number;
+    transitsOut: number;
+    peeks: number;
+    denies: number;
+    breaches: number;
+    preyAttempts: number;
+    hourHistogram: number[];
+    /** Distinct local days in the month with at least one rollup row. */
+    activeDays: number;
+}
+
 /** RfidDailyStats summed per chip across a day range (leaderboards). */
 export interface CatActivityAggregate {
     rfidCode: string;
