@@ -4,7 +4,8 @@ export type RfidProfileSex = typeof RFID_PROFILE_SEX_VALUES[number];
 export class RfidProfile {
     rfidCode: string;
     userId: number;
-    label: string;
+    /** The user's name for the cat; null on rows holding only other contributions (e.g. avatar only). */
+    label: string | null;
     version: number;
     createdAt: Date;
     /** Pet date of birth (date-only, no time component), or null when not set. */
@@ -13,6 +14,11 @@ export class RfidProfile {
     sex?: RfidProfileSex | null;
     /** Timestamp of the last avatar upload; null when the profile has no avatar. */
     avatarUpdatedAt?: Date | null;
+    /**
+     * Merged view only (RfidService.mergeRfidProfiles): the user whose row
+     * holds the displayed avatar. Avatar URLs are /rfid-profiles/<avatarUserId>/<rfidCode>/avatar.
+     */
+    avatarUserId?: number | null;
 
     [key: string]: any; // Allow any additional properties
 
