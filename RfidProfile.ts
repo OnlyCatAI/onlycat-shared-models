@@ -19,6 +19,12 @@ export class RfidProfile {
      * holds the displayed avatar. Avatar URLs are /rfid-profiles/<avatarUserId>/<rfidCode>/avatar.
      */
     avatarUserId?: number | null;
+    /**
+     * Merged view only (RfidService.mergeRfidProfiles): ids of the users
+     * whose rows contributed to this merged profile. Lets a client tell
+     * whether the requesting user has a row of their own to edit or delete.
+     */
+    contributedUserIds?: number[];
 
     [key: string]: any; // Allow any additional properties
 
