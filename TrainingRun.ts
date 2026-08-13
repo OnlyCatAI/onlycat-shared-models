@@ -137,6 +137,17 @@ export interface EvaluationReportRow {
     support: number;
 }
 
+/**
+ * A validation image the model got wrong, ranked by its confidence in the
+ * wrong answer. The top of the list is where labelling errors hide.
+ */
+export type MisclassifiedExample = {
+    label: string;
+    predicted: string;
+    confidence: number;
+    deviceId: string;
+} & ({ kind: "frame"; eventId: number; frameIndex: number } | { kind: "snapshot"; timestamp: number });
+
 /** results/<run>/evaluation.json uploaded by the training instance. */
 export interface TrainingRunEvaluation {
     model: string;
@@ -148,4 +159,6 @@ export interface TrainingRunEvaluation {
     accuracy: number;
     report: Record<string, EvaluationReportRow | number>;
     confusion_matrix: number[][];
+    /** Present from 2026-08-07 onward; older runs lack it. */
+    misclassified?: MisclassifiedExample[];
 }
