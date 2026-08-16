@@ -30,6 +30,8 @@ export interface TrainingRunConfig {
     alpha?: number;
     /** Warm-start from this completed run's model_qat_float.keras instead of ImageNet. */
     initFromRunId?: number;
+    /** Also inherit the seed run's quantizer state, skipping the float phase. */
+    resumeQat?: boolean;
     notes?: string;
 }
 
