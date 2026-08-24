@@ -5,6 +5,7 @@ export interface TransitPolicyRuleCriteria {
     eventTriggerSource?: EventTriggerSource | EventTriggerSource[];
     eventClassification?: EventClassification | EventClassification[];
     rfidCode?: string | string[];
+    rfidTimeout?: number;
     timeRange?: string | string[];
     motionSensorState?: MotionSensorState | MotionSensorState[];
     flapState?: FlapState | FlapState[];
