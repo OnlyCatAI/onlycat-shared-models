@@ -40,6 +40,7 @@ export class EventSummary {
     eventId: number;
     processedFrameCount: number;
     subevents: SubEvent[];
+    invalidatedAt?: Date | null;
     [key: string]: any; // Allow any additional properties
 
     constructor(initObj: Partial<EventSummary> & Record<string, any>) {
