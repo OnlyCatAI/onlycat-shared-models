@@ -17,6 +17,14 @@ export class DevicePaymentPlanPreview {
     currentDate: Date;
     startDate: Date | null;
     trialEndDate: Date | null;
+    /** Undiscounted live Stripe price (pence). Only set when a lifetime discount applies. */
+    originalAmount?: number;
+    /** Realized discount, i.e. originalAmount minus the final unit amount (pence). Only set when a lifetime discount applies. */
+    discountAmount?: number;
+    /** Years (fractional, pro-rata) of accrued paid subscription time used to compute the discount. Only set when a lifetime discount applies. */
+    yearsSubscribed?: number;
+    /** The Stripe product ID backing the discounted lifetime price, reused so the checkout session charges the same amount. Only set when a lifetime discount applies. */
+    lifetimeDiscountProductId?: string;
 
     constructor(initObj: {
         invoice: Stripe.Invoice;
@@ -25,6 +33,10 @@ export class DevicePaymentPlanPreview {
         currentDate: Date;
         startDate: Date | null;
         trialEndDate: Date | null;
+        originalAmount?: number;
+        discountAmount?: number;
+        yearsSubscribed?: number;
+        lifetimeDiscountProductId?: string;
     }) {
         this.invoice = initObj.invoice;
         this.lineItems = initObj.lineItems || [];
@@ -32,6 +44,10 @@ export class DevicePaymentPlanPreview {
         this.currentDate = new Date(initObj.currentDate);
         this.startDate = initObj.startDate ? new Date(initObj.startDate) : null;
         this.trialEndDate = initObj.trialEndDate ? new Date(initObj.trialEndDate) : null;
+        this.originalAmount = initObj.originalAmount;
+        this.discountAmount = initObj.discountAmount;
+        this.yearsSubscribed = initObj.yearsSubscribed;
+        this.lifetimeDiscountProductId = initObj.lifetimeDiscountProductId;
     }
 
     /**
