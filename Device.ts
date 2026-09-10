@@ -16,6 +16,17 @@ export class Device {
     deviceId: string;
     description: string | null;
     timeZone: string | null;
+    /**
+     * Server-rendered idle screen template id ('5a', ...) or null to fall
+     * back to the fleet default (which may itself be "no screen").
+     * Consumed only by the render service - deliberately NOT in the shadow.
+     */
+    screenTemplate: string | null;
+    /**
+     * BCP 47 locale for what the device displays (server-rendered screens
+     * and, soon, on-device UX). Mirrored to the shadow like timeZone.
+     */
+    locale: string | null;
     firmwareChannel: string | null;
     deviceTransitPolicyId: number | null;
     connectivity?: DeviceConnectivity;
@@ -25,6 +36,8 @@ export class Device {
         this.deviceId = initObj.deviceId!;
         this.description = initObj.description!;
         this.timeZone = initObj.timeZone!;
+        this.screenTemplate = initObj.screenTemplate ?? null;
+        this.locale = initObj.locale ?? null;
         this.firmwareChannel = initObj.firmwareChannel!;
         this.deviceTransitPolicyId = initObj.deviceTransitPolicyId!;
         this.connectivity = initObj.connectivity!;
