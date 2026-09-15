@@ -28,6 +28,7 @@ export class DeviceEvent {
     accessToken: string | null;
     deletedAt: Date | null;
     rfidCodes?: string[];
+    paymentRequired?: boolean;
     [key: string]: any; // Allow any additional properties
 
     constructor(initObj: Partial<DeviceEvent> & Record<string, any>) {
@@ -44,6 +45,7 @@ export class DeviceEvent {
         this.accessToken = initObj.accessToken!;
         this.deletedAt = initObj.deletedAt || null;
         this.rfidCodes = initObj.rfidCodes;
+        this.paymentRequired = initObj.paymentRequired;
 
         // Assign other properties from initObj to this instance
         for (const key in initObj) {
