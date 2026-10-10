@@ -22,6 +22,8 @@ export class EventUserFeedback {
     feedbackType: FeedbackType;
     feedbackResolution?: FeedbackResolution;
     assignmentAvailable?: boolean;
+    adminNotes?: string | null;
+    adminNotesAvailable?: boolean;
     assignedToUserId?: number | null;
     assignedByUserId?: number | null;
     assignedAt?: Date | string | null;
@@ -40,6 +42,8 @@ export class EventUserFeedback {
         this.feedbackType = initObj.feedbackType!;
         this.feedbackResolution = initObj.feedbackResolution;
         this.assignmentAvailable = initObj.assignmentAvailable;
+        this.adminNotes = initObj.adminNotes ?? null;
+        this.adminNotesAvailable = initObj.adminNotesAvailable;
         this.assignedToUserId = initObj.assignedToUserId ?? null;
         this.assignedByUserId = initObj.assignedByUserId ?? null;
         this.assignedAt = initObj.assignedAt ?? null;
