@@ -22,6 +22,13 @@ export class EventUserFeedback {
     feedbackType: FeedbackType;
     feedbackResolution?: FeedbackResolution;
     assignmentAvailable?: boolean;
+    faultCategory?: string | null;
+    rootCauses?: string[];
+    faultVersion?: number;
+    faultLabelsAvailable?: boolean;
+    internalCommentCount?: number;
+    hasUnreadComments?: boolean;
+    internalCommentsAvailable?: boolean;
     adminNotes?: string | null;
     adminNotesAvailable?: boolean;
     assignedToUserId?: number | null;
@@ -42,6 +49,13 @@ export class EventUserFeedback {
         this.feedbackType = initObj.feedbackType!;
         this.feedbackResolution = initObj.feedbackResolution;
         this.assignmentAvailable = initObj.assignmentAvailable;
+        this.faultCategory = initObj.faultCategory ?? null;
+        this.rootCauses = initObj.rootCauses ?? [];
+        this.faultVersion = initObj.faultVersion ?? 0;
+        this.faultLabelsAvailable = initObj.faultLabelsAvailable;
+        this.internalCommentCount = initObj.internalCommentCount;
+        this.hasUnreadComments = initObj.hasUnreadComments ?? false;
+        this.internalCommentsAvailable = initObj.internalCommentsAvailable;
         this.adminNotes = initObj.adminNotes ?? null;
         this.adminNotesAvailable = initObj.adminNotesAvailable;
         this.assignedToUserId = initObj.assignedToUserId ?? null;
