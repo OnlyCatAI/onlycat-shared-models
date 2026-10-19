@@ -3,6 +3,7 @@ export const faultCategories = [
     { value: "microchip_reading", label: "Microchip reading issue", causes: [
         { value: "metal", label: "Metal" },
         { value: "noisy_adaptor", label: "Noisy adaptor" },
+        { value: "scanning", label: "Scanning" },
         { value: "weak_microchip", label: "Weak microchip" }
     ] },
     { value: "contraband_let_in", label: "Contraband let in", causes: [
@@ -51,4 +52,10 @@ export function isCustomFaultCategory(value: unknown): value is string {
 export function faultCategoryLabel(value: string | null | undefined): string {
     const label = faultCategories.find(category => category.value === value)?.label;
     return isCustomFaultCategory(value) ? value.slice(7) : label ?? "Unlabelled";
+}
+
+/** Contact reasons use the diagnosis vocabulary; retain support for the older Scanning category. */
+export function contactReasonsForDiagnosis(category: string | null | undefined, rootCauses: string[] = []): Array<{ value: string; label: string }> {
+    const values = Array.from(new Set([...rootCauses, ...(category === "scanning" ? ["scanning"] : [])]));
+    return values.map(value => ({ value, label: faultReasonLabel(value) }));
 }
