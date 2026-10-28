@@ -3,6 +3,7 @@ export enum FeedbackType {
     FalseAlarm = "false_alarm",
     MissedContraband = "missed_contraband",
     IncorrectTimeline = "incorrect_timeline",
+    MicrochipNotRead = "microchip_not_read",
     OtherIssue = "other_issue"
 }
 
