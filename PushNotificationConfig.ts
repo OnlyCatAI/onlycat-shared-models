@@ -27,6 +27,8 @@ export interface PushNotificationQuietHours {
     timeRange: string;
     timezone: string;
     criticalBypasses: boolean;
+    // Deliver bypassing critical alerts at standard priority, so they don't override silent mode/DND.
+    demoteCritical: boolean;
 }
 
 export type PushNotificationRules = Record<PushNotificationRuleKey, PushNotificationRuleValue>;
@@ -58,7 +60,8 @@ export const DEFAULT_PUSH_NOTIFICATION_QUIET_HOURS: PushNotificationQuietHours =
     enabled: false,
     timeRange: "22:00-07:00",
     timezone: "Europe/London",
-    criticalBypasses: true
+    criticalBypasses: true,
+    demoteCritical: false
 };
 
 export const DEFAULT_PUSH_NOTIFICATION_CONFIG: PushNotificationConfigJson = {
