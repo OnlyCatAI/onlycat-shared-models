@@ -4,6 +4,7 @@ export enum FeedbackType {
     MissedContraband = "missed_contraband",
     IncorrectTimeline = "incorrect_timeline",
     MicrochipNotRead = "microchip_not_read",
+    StuckOnScanning = "stuck_on_scanning",
     OtherIssue = "other_issue"
 }
 
