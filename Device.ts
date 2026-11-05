@@ -48,6 +48,13 @@ export class Device {
     locale: string | null;
     firmwareChannel: string | null;
     deviceTransitPolicyId: number | null;
+    /**
+     * While a door policy is active temporarily: epoch ms when the gateway
+     * switches the device back to transitPolicyRevertToId. Both null otherwise.
+     */
+    transitPolicyRevertAt: number | null;
+    /** The policy the device returns to at transitPolicyRevertAt (null if it was deleted). */
+    transitPolicyRevertToId: number | null;
     connectivity?: DeviceConnectivity;
     [key: string]: any; // Allow any additional properties
 
@@ -59,6 +66,8 @@ export class Device {
         this.locale = initObj.locale ?? null;
         this.firmwareChannel = initObj.firmwareChannel!;
         this.deviceTransitPolicyId = initObj.deviceTransitPolicyId!;
+        this.transitPolicyRevertAt = initObj.transitPolicyRevertAt ?? null;
+        this.transitPolicyRevertToId = initObj.transitPolicyRevertToId ?? null;
         this.connectivity = initObj.connectivity!;
 
         // Assign other properties from initObj to this instance
