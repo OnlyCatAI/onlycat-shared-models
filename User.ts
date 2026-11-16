@@ -5,6 +5,12 @@ export class User {
     name: string | null;
     description: string | null;
     avatarUrl: string | null;
+    /**
+     * True when avatarUrl is a photo the user uploaded in the app; false when
+     * it mirrors their sign-in provider (Auth0/Google) picture. Only sent for
+     * the signed-in user's own User.
+     */
+    avatarCustom?: boolean;
     userLevel?: "ADMIN" | null;
 
     [key: string]: any; // Allow any additional properties
@@ -16,6 +22,7 @@ export class User {
         this.name = initObj.name ?? null;
         this.description = initObj.description ?? null;
         this.avatarUrl = initObj.avatarUrl ?? null;
+        this.avatarCustom = initObj.avatarCustom;
         this.userLevel = initObj.userLevel;
 
         // Assign other properties from initObj to this instance
